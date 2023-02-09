@@ -10,10 +10,8 @@ public class Main {
         File files = new File("output.txt");
         BestAskItem bestAskItem = new BestAskItem();
         BestBidItem bestBidItem = new BestBidItem();
-        QueryBestBid queryBestBid = new QueryBestBid();
-        QueryBestAsk queryBestAsk = new QueryBestAsk();
-        QuerySizeAtPrice querySizeAtPrice = new QuerySizeAtPrice();
-        StandartFileReader fileRead = new StandartFileReader(file);
+
+        StandartFileReader fileRead = new StandartFileReader(file, bestAskItem, bestBidItem);
         fileRead.readLines();
     }
 

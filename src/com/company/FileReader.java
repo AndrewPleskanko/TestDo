@@ -2,7 +2,7 @@ package com.company;
 
 import java.io.IOException;
 
-public interface MyFileReader {
+public interface FileReader {
 
     void readLines() throws IOException;
 }
