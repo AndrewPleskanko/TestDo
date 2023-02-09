@@ -8,6 +8,11 @@ public class Main {
     public static void main(String[] args) throws IOException {
         File file = new File("input.txt");
         File files = new File("output.txt");
+        BestAskItem bestAskItem = new BestAskItem();
+        BestBidItem bestBidItem = new BestBidItem();
+        QueryBestBid queryBestBid = new QueryBestBid();
+        QueryBestAsk queryBestAsk = new QueryBestAsk();
+        QuerySizeAtPrice querySizeAtPrice = new QuerySizeAtPrice();
         StandartFileReader fileRead = new StandartFileReader(file);
         fileRead.readLines();
     }

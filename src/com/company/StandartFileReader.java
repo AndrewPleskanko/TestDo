@@ -3,24 +3,21 @@ package com.company;
 import java.io.*;
 
 public class StandartFileReader implements MyFileReader {
-    BestAskItem bestAskItem = new BestAskItem();
-    BestBidItem bestBidItem = new BestBidItem();
-    File file;
-    QueryBestBid queryBestBid = new QueryBestBid();
-    QueryBestAsk queryBestAsk = new QueryBestAsk();
-    QuerySizeAtPrice querySizeAtPrice = new QuerySizeAtPrice();
+    private BestAskItem bestAskItem;
+    private BestBidItem bestBidItem;
+    private QueryBestBid queryBestBid;
+    private QueryBestAsk queryBestAsk;
+    private QuerySizeAtPrice querySizeAtPrice;
+    private File file;
 
-    public StandartFileReader(BestAskItem bestAskItem, BestBidItem bestBidItem, File file, QueryBestBid queryBestBid, QueryBestAsk queryBestAsk, QuerySizeAtPrice querySizeAtPrice) {
+    public StandartFileReader(File file, BestAskItem bestAskItem, BestBidItem bestBidItem,
+                              QueryBestBid queryBestBid, QueryBestAsk queryBestAsk, QuerySizeAtPrice querySizeAtPrice) {
         this.bestAskItem = bestAskItem;
         this.bestBidItem = bestBidItem;
         this.file = file;
         this.queryBestBid = queryBestBid;
         this.queryBestAsk = queryBestAsk;
         this.querySizeAtPrice = querySizeAtPrice;
-    }
-
-    public StandartFileReader(File file) {
-        this.file = file;
     }
 
     @Override
