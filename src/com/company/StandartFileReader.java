@@ -1,18 +1,24 @@
 package com.company;
 
 import java.io.*;
+import java.util.HashMap;
 
 public class StandartFileReader implements FileReader {
     private BestAskItem bestAskItem;
     private BestBidItem bestBidItem;
+    private CheapestAsk cheapestAsk;
 
     private File file;
     private WriteLineToFile writeLinetoFile;
 
-    public StandartFileReader(File file, BestAskItem bestAskItem, BestBidItem bestBidItem,) {
+
+    public StandartFileReader(BestAskItem bestAskItem, BestBidItem bestBidItem,
+                              CheapestAsk cheapestAsk, File file, WriteLineToFile writeLinetoFile) {
         this.bestAskItem = bestAskItem;
         this.bestBidItem = bestBidItem;
+        this.cheapestAsk = cheapestAsk;
         this.file = file;
+        this.writeLinetoFile = writeLinetoFile;
     }
 
     @Override
@@ -53,15 +59,14 @@ public class StandartFileReader implements FileReader {
                     switch (data[1]) {
                         case "buy" -> {
                             int size = Integer.parseInt(data[2]);
-                            if (size > bestAskItem.getBestAskSize()) {
-                                bestAskItem.setBestAskSize(0);
+                            if (size > cheapestAsk.getCheapAskSize()) {
+                                cheapestAsk.setCheapAskSize(0);
                             } else {
-                                bestAskItem.setBestAskSize(bestAskItem.getBestAskSize() - size);
+                                cheapestAsk.setCheapAskSize(cheapestAsk.getCheapAskSize() - size);
                             }
                         }
                         case "sell" -> {
                             int size = Integer.parseInt(data[2]);
-
                             if (size > bestBidItem.getBestBidSize()) {
                                 bestBidItem.setBestBidSize(0);
                             } else {
@@ -75,7 +80,7 @@ public class StandartFileReader implements FileReader {
         br.close();
     }
 
-    private static void updateLimitOrderBook(int price, int size, String type) {
+    private void updateLimitOrderBook(int price, int size, String type) {
         switch (type) {
             case "bid":
                 if (size == 0) {
@@ -96,14 +101,22 @@ public class StandartFileReader implements FileReader {
                         bestAskItem.setBestAskPrice(0);
                         bestAskItem.setBestAskSize(0);
                     }
+                    if (price == cheapestAsk.getCheapAskPrice()) {
+                        cheapestAsk.setCheapAskSize(0);
+                        cheapestAsk.setCheapAskPrice(0);
+                    }
                 } else {
-                    if (price <= bestAskItem.getBestAskPrice()) {
+                    if (price >= bestAskItem.getBestAskPrice()) {
                         bestAskItem.setBestAskPrice(price);
                         bestAskItem.setBestAskSize(size);
                     }
+                    if (price <= cheapestAsk.getCheapAskPrice()) {
+                        cheapestAsk.setCheapAskPrice(price);
+                        cheapestAsk.setCheapAskSize(size);
+                    }
                 }
+
                 break;
         }
     }
-
 }

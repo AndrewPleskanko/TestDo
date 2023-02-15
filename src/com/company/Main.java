@@ -10,8 +10,10 @@ public class Main {
         File files = new File("output.txt");
         BestAskItem bestAskItem = new BestAskItem();
         BestBidItem bestBidItem = new BestBidItem();
+        CheapestAsk cheapestAsk = new CheapestAsk();
+        WriteLineToFile writeLinetoFile = new WriteLineToFile();
 
-        StandartFileReader fileRead = new StandartFileReader(file, bestAskItem, bestBidItem);
+        StandartFileReader fileRead = new StandartFileReader(bestAskItem, bestBidItem, cheapestAsk, file, writeLinetoFile);
         fileRead.readLines();
     }
 
