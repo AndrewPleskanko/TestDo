@@ -51,7 +51,7 @@ public class StandartFileReader implements FileReader {
                             } else if (price == bestAskItem.getBestAskPrice()) {
                                 size = bestAskItem.getBestAskSize();
                             }
-                            writeLinetoFile.writeLine(size, 0);
+                            writeLinetoFile.writeLine(size, -1);
                         }
                     }
                     break;
@@ -89,7 +89,7 @@ public class StandartFileReader implements FileReader {
                         bestBidItem.setBestBidSize(0);
                     }
                 } else {
-                    if (price >= bestBidItem.getBestBidPrice()) {
+                    if (price >= bestBidItem.getBestBidPrice() && size > 0) {
                         bestBidItem.setBestBidPrice(price);
                         bestBidItem.setBestBidSize(size);
                     }
@@ -106,16 +106,15 @@ public class StandartFileReader implements FileReader {
                         cheapestAsk.setCheapAskPrice(0);
                     }
                 } else {
-                    if (price >= bestAskItem.getBestAskPrice()) {
+                    if (price >= bestAskItem.getBestAskPrice() && size > 0) {
                         bestAskItem.setBestAskPrice(price);
                         bestAskItem.setBestAskSize(size);
                     }
-                    if (price <= cheapestAsk.getCheapAskPrice()) {
+                    if (price <= cheapestAsk.getCheapAskPrice() && size > 0) {
                         cheapestAsk.setCheapAskPrice(price);
                         cheapestAsk.setCheapAskSize(size);
                     }
                 }
-
                 break;
         }
     }
